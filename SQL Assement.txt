@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #What is the functional difference between SELECT * and specifying column names, and when is each preferred?
 select * from orders_data;
 select order_id, sales, profit from orders_data;
@@ -94,4 +95,102 @@ SELECT
     Profit
 FROM orders_data
 WHERE Profit < 0
+=======
+#What is the functional difference between SELECT * and specifying column names, and when is each preferred?
+select * from orders_data;
+select order_id, sales, profit from orders_data;
+
+#Which keyword renames a column in the output, and does this alias change the actual table structure?
+select sales as total_sales from orders_data;
+#No, the alias only changes the display name in the query output. It does not modify the database structure.
+
+#Why does wrapping a numeric value in quotes (e.g., '5000') in a WHERE clause create a data type conflict?
+select * from orders_data where sales = '5000';
+select * from orders_data where sales = 5000;
+
+#Contrast ORDER BY Profit DESC versus ASC when identifying the top 10 most profitable orders.
+select order_id, sales, profit from orders_data order by profit desc limit 10;
+select order_id, sales, profit from orders_data order by profit asc limit 10;
+
+#What is the T-SQL equivalent of LIMIT in MS SQL Server, and why does syntax vary across SQL engines?
+select * from orders_data limit 10;
+#SQL syntax varies because different database vendors (MySQL, SQL Server, Oracle, PostgreSQL) implement their own extensions to the SQL standard.
+
+#Explain the logical execution order of SELECT, WHERE, ORDER BY, and LIMIT clauses.
+SELECT Order_ID, Profit
+FROM orders_data
+WHERE Profit > 100
+ORDER BY Profit DESC
+LIMIT 10;
+
+#Retrieve the first 20 records
+Select * from orders_data limit 20;
+
+#Select Order ID, Order Date, Sales, and Profit with alias
+select order_id, order_date, sales as total_sales, profit from orders_data;
+
+#High-value transactions where Sales exceeds 5000
+select * from orders_data where sales > 5000;
+
+#Top 10 most profitable orders
+SELECT
+    Order_ID,
+    Sales,
+    Profit
+FROM orders_data
+ORDER BY Profit DESC
+LIMIT 10;
+
+#Multi-Condition Filtering Queries(High discount but low profit)
+select * from orders_data where discount >= 0.30 and profit < 0;
+
+#Technology products with high sales
+SELECT * FROM orders_data WHERE Category = 'Technology' AND Sales > 1000;
+
+#Consumer segment with losses
+SELECT * FROM orders_data WHERE Segment = 'Consumer' AND Profit < 0;
+
+#Aggregated Performance Report by Region(Regional Sales and Profit Analysis)
+SELECT
+    Region,
+    COUNT(*) AS Total_Orders,
+    SUM(Sales) AS Total_Sales,
+    SUM(Profit) AS Total_Profit,
+    AVG(Discount) AS Avg_Discount
+FROM orders_data
+GROUP BY Region
+ORDER BY Total_Profit DESC;
+
+#Identify Underperforming Categories
+SELECT
+    Category,
+    AVG(Discount) AS Avg_Discount,
+    SUM(Sales) AS Total_Sales,
+    SUM(Profit) AS Total_Profit
+FROM orders_data
+GROUP BY Category
+ORDER BY Total_Profit ASC;
+
+#Discount vs Profit Analysis
+SELECT
+    Discount,
+    COUNT(*) AS Orders_Count,
+    SUM(Sales) AS Total_Sales,
+    SUM(Profit) AS Total_Profit
+FROM orders_data
+GROUP BY Discount
+ORDER BY Discount;
+
+#Loss-Making Transactions Report
+SELECT
+    Order_ID,
+    Category,
+    Sub_Category,
+    Region,
+    Sales,
+    Discount,
+    Profit
+FROM orders_data
+WHERE Profit < 0
+>>>>>>> 8b71ed7 (Python_Assessment)
 ORDER BY Profit ASC;
