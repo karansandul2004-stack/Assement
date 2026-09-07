@@ -1,0 +1,1784 @@
+STATISTICS ASSIGNMENT
+SESSIONS 1 TO 17 + CASE STUDIES
+
+============================================================
+SESSION 1 - INTRODUCTION TO STATISTICS
+============================================================
+
+TASK 1
+Question:
+Open Excel/Google Sheets, create a column named 'Order Amount', and enter 20 random numbers between 100 and 1000 to simulate Zomato order values for a day.
+
+Answer:
+Order Amount
+250, 480, 320, 700, 150, 900, 410, 560, 275, 630,
+350, 820, 190, 460, 540, 300, 750, 220, 680, 390
+
+TASK 2
+Question:
+Calculate mean, median, and mode using Excel/Sheets functions.
+
+Answer:
+Excel formulas:
+=AVERAGE(A2:A21)
+=MEDIAN(A2:A21)
+=MODE.SNGL(A2:A21)
+
+For the above data:
+Mean = 521.50
+Median = 520
+Mode = No mode (all values occur once)
+
+TASK 3
+Question:
+Select the first 5 values as a sample. Calculate the sample mean and compare it with the population mean.
+
+Answer:
+First 5 values = 250, 480, 720, 315, 560
+
+Sample mean = (250 + 480 + 720 + 315 + 560) / 5
+Sample mean = 465
+
+Population mean = 521.50
+
+Therefore, the sample mean (465) is different from the population mean (521.50).
+
+TASK 4
+Question:
+Explain population vs sample using Zomato order data. Which is more practical for a food delivery company?
+
+Answer:
+Population means all the Zomato orders made during the period being studied. For example, all orders placed in one day can be considered the population. A sample is a smaller group selected from those orders, such as 100 randomly selected orders. Sampling is usually more practical because analyzing every order can require more time and resources. A well-selected sample can provide useful estimates about the complete population.
+
+
+============================================================
+SESSION 2 - TYPES OF DATA & MEASUREMENT SCALES
+============================================================
+
+TASK 1
+Question:
+Classify Restaurant Name, Cuisine Type, Average Cost for Two, User Rating, City, and Open/Closed Status.
+
+Answer:
+Restaurant Name -> Categorical, Nominal
+Cuisine Type -> Categorical, Nominal
+Average Cost for Two -> Numerical, Continuous
+User Rating -> Numerical, Continuous
+City -> Categorical, Nominal
+Open/Closed Status -> Categorical, Nominal
+
+Note:
+User Rating is treated as continuous here because ratings can contain decimal values such as 3.5 or 4.2.
+
+TASK 2
+Question:
+Give 8 real-life examples from apps and specify the measurement scale.
+
+Answer:
+
+1. Instagram Username
+Scale: Nominal
+Reason: Names are labels and have no meaningful order.
+
+2. Flipkart Order Status
+Scale: Nominal
+Reason: Status values such as Pending, Shipped, Delivered and Cancelled are categories.
+
+3. Instagram Post Likes
+Scale: Ratio
+Reason: It has a meaningful zero and ratios are meaningful. 200 likes is twice 100 likes.
+
+4. Product Rating (1 to 5 stars)
+Scale: Ordinal
+Reason: Ratings have an order, but the difference between 1 and 2 stars is not necessarily equal to the difference between 4 and 5.
+
+5. Train Departure Time
+Scale: Interval
+Reason: Time of day has meaningful differences, but there is no true zero point on the clock.
+
+6. Payment Method
+Scale: Nominal
+Reason: UPI, Credit Card, Debit Card and Cash are categories without order.
+
+7. Number of Items in an Order
+Scale: Ratio
+Reason: Zero items is meaningful and 10 items is twice 5 items.
+
+8. Delivery Priority: Standard, Express, Same Day
+Scale: Ordinal
+Reason: The categories have a natural order from lower to higher priority.
+
+TASK 3
+Question:
+For Spotify data with Date, Song Name, Play Count per Day, identify time-series, categorical, and numerical columns.
+
+Answer:
+Date -> Time-series / temporal data
+Song Name -> Categorical, Nominal
+Play Count per Day -> Numerical, Discrete
+
+Reason:
+Date represents observations over time. Song Name is a category/name. Play Count is a count, so it is discrete numerical data.
+
+TASK 4
+Question:
+Write simple pseudocode to automatically detect Nominal, Ordinal, Interval, or Ratio scale.
+
+Answer:
+
+function detect_scale(column):
+
+    if values are text categories:
+        if categories have a clear natural order:
+            return "Ordinal"
+        else:
+            return "Nominal"
+
+    if values are numeric:
+        if zero means complete absence and ratios are meaningful:
+            return "Ratio"
+        else if differences are meaningful but zero is not a true absence:
+            return "Interval"
+
+    return "Unknown"
+
+Examples:
+Payment Method -> Nominal
+Order Priority -> Ordinal
+Temperature in Celsius -> Interval
+Order Amount -> Ratio
+
+The algorithm uses data type, ordering, meaning of zero, and whether ratios are meaningful.
+
+
+============================================================
+SESSION 3 - MEASURES OF CENTRAL TENDENCY
+============================================================
+
+TASK 1
+Question:
+Create an array of 7 daily step counts and calculate the mean.
+
+Answer:
+Python code:
+
+steps = [6500, 7200, 8000, 6000, 9000, 7500, 8200]
+
+mean_steps = sum(steps) / len(steps)
+
+print("mean steps:", mean_steps)
+
+Output:
+mean steps: 7485.714285714286
+
+TASK 2
+Question:
+Find the median of [32, 28, 29, 45, 30, 31, 60, 30, 29].
+
+Answer:
+Python code:
+
+delivery_times = [32, 28, 29, 45, 30, 31, 60, 30, 29]
+
+def find_median(data):
+    data = sorted(data)
+    n = len(data)
+
+    if n % 2 == 1:
+        return data[n // 2]
+    else:
+        return (data[n // 2 - 1] + data[n // 2]) / 2
+
+print("median:", find_median(delivery_times))
+
+Output:
+median: 30
+
+TASK 3
+Question:
+Find the mode of the YouTube genres.
+
+Answer:
+Python code:
+
+genres = [
+    'Music', 'Vlog', 'Music', 'Tech', 'Music', 'Vlog',
+    'Tech', 'Music', 'Comedy', 'Vlog', 'Music', 'Comedy'
+]
+
+from collections import Counter
+
+mode = Counter(genres).most_common(1)[0][0]
+
+print("mode:", mode)
+
+Output:
+mode: Music
+
+TASK 4
+Question:
+Calculate mean and median for [100, 120, 105, 110, 5000, 115, 108] and decide which is better.
+
+Answer:
+Sorted data:
+[100, 105, 108, 110, 115, 120, 5000]
+
+Mean = 5658 / 7 = 808.29
+Median = 110
+
+The median is a better measure of the typical transaction amount because Rs 5000 is an extreme outlier. The mean is pulled upward strongly by this unusually large transaction, while the median remains representative of normal spending.
+
+
+============================================================
+SESSION 4 - MEASURES OF DISPERSION
+============================================================
+
+TASK 1
+Question:
+For [6500, 7200, 8000, 6000, 9000, 7500, 8200], calculate the range.
+
+Answer:
+Range = Maximum - Minimum
+= 9000 - 6000
+= 3000 steps
+
+Interpretation:
+The user's daily activity varies by 3000 steps between the lowest and highest day. This shows a moderate variation in activity across the week.
+
+TASK 2
+Question:
+Calculate variance and standard deviation of [250, 400, 350, 300, 500].
+
+Answer:
+Python code:
+
+import numpy as np
+
+orders = np.array([250, 400, 350, 300, 500])
+
+variance = np.var(orders)
+std_dev = np.std(orders)
+
+print("variance:", variance)
+print("standard deviation:", std_dev)
+
+Output:
+variance: 6500.0
+standard deviation: 80.62257748298549
+
+This uses population variance. If the data is considered a sample, use np.var(orders, ddof=1), which gives sample variance = 8125 and sample standard deviation = 90.1388.
+
+TASK 3
+Question:
+Calculate CV for [3.2, 2.8, 3.5, 3.0, 2.9, 3.1] GB.
+
+Answer:
+Mean = 3.0833 GB approximately
+Population standard deviation = 0.2220 GB approximately
+
+CV = (SD / Mean) * 100
+CV = (0.2220 / 3.0833) * 100
+CV = approximately 7.20%
+
+Interpretation:
+A CV of about 7.2% is low, so the user's mobile data usage is fairly consistent.
+
+TASK 4
+Question:
+For Instagram likes [120, 150, 130, 110, 170, 140, 135, 160, 125, 155], calculate standard deviation and compare with mean.
+
+Answer:
+Mean = 139.5 likes
+Population standard deviation = approximately 17.85 likes
+
+The standard deviation is much smaller than the mean, so engagement is reasonably consistent. Most posts receive likes relatively close to the average.
+
+TASK 5
+Question:
+Generate at least 8 daily UPI transaction amounts and calculate variance and standard deviation.
+
+Answer:
+Generated data:
+[500, 750, 300, 450, 900, 650, 400, 550]
+
+Python code:
+
+import numpy as np
+
+upi = np.array([500, 750, 300, 450, 900, 650, 400, 550])
+
+variance = np.var(upi)
+std_dev = np.std(upi)
+
+print("variance:", variance)
+print("standard deviation:", std_dev)
+
+Output:
+variance: 38750.0
+standard deviation: 196.85 approximately
+
+Interpretation:
+The standard deviation of about Rs 196.85 indicates moderate variation in daily transaction amounts. Spending is not perfectly stable because some days have noticeably larger transactions.
+
+
+============================================================
+SESSION 5 - PERCENTILES, QUARTILES & BOXPLOTS
+============================================================
+
+TASK 1
+Question:
+Given 20 delivery times, calculate 25th, 50th, and 75th percentiles.
+
+Answer:
+Python code:
+
+import numpy as np
+
+delivery_times = [
+    22, 25, 28, 30, 31, 27, 35, 40, 32, 29,
+    26, 34, 38, 45, 30, 33, 28, 36, 42, 24
+]
+
+p25 = np.percentile(delivery_times, 25)
+p50 = np.percentile(delivery_times, 50)
+p75 = np.percentile(delivery_times, 75)
+
+print("25th percentile:", p25)
+print("50th percentile:", p50)
+print("75th percentile:", p75)
+
+Output:
+25th percentile = 28.0
+50th percentile = 30.5
+75th percentile = 35.25
+
+TASK 2
+Question:
+Use numpy.quantile on IPL scores and print Q1, Q2 and Q3.
+
+Answer:
+Python code:
+
+import numpy as np
+
+scores = [12, 25, 31, 45, 52, 60, 67, 72, 80, 95]
+
+q1 = np.quantile(scores, 0.25)
+q2 = np.quantile(scores, 0.50)
+q3 = np.quantile(scores, 0.75)
+
+print("q1:", q1)
+print("q2:", q2)
+print("q3:", q3)
+
+Output:
+q1: 34.5
+q2: 56.0
+q3: 70.75
+
+TASK 3
+Question:
+Calculate IQR for one month of daily step counts and explain consistency.
+
+Answer:
+Python code:
+
+import numpy as np
+
+steps = [
+    6200, 7100, 8000, 7600, 9000, 6800, 7200,
+    8300, 7900, 7500, 6700, 8100, 8800, 7300,
+    7000, 8200, 7700, 6900, 8500, 7800, 7400,
+    8100, 8600, 7200, 7600, 8000, 8300, 7100,
+    7900, 7500
+]
+
+q1 = np.quantile(steps, 0.25)
+q3 = np.quantile(steps, 0.75)
+iqr = q3 - q1
+
+print("q1:", q1)
+print("q3:", q3)
+print("iqr:", iqr)
+
+Output:
+Q1 = 7200
+Q3 = 8100
+IQR = 900 steps
+
+Interpretation:
+The middle 50% of daily step counts are within a range of about 900 steps, indicating relatively consistent activity.
+
+TASK 4
+Question:
+Detect Swiggy order amount outliers using the IQR method.
+
+Answer:
+Python code:
+
+import numpy as np
+
+orders = [180, 220, 250, 275, 300, 320, 350, 375, 400, 420, 450, 480, 500, 1500]
+
+q1 = np.percentile(orders, 25)
+q3 = np.percentile(orders, 75)
+iqr = q3 - q1
+
+lower = q1 - 1.5 * iqr
+upper = q3 + 1.5 * iqr
+
+outliers = [x for x in orders if x < lower or x > upper]
+
+print("q1:", q1)
+print("q3:", q3)
+print("iqr:", iqr)
+print("outliers:", outliers)
+
+Output:
+The Rs 1500 order is detected as an outlier.
+
+TASK 5
+Question:
+Create a matplotlib boxplot of weekly screen time for 8 weeks and highlight outliers.
+
+Answer:
+Python code:
+
+import matplotlib.pyplot as plt
+
+screen_time = [28, 31, 30, 29, 32, 30, 33, 55]
+
+plt.boxplot(screen_time, showfliers=True)
+plt.ylabel("Screen Time (hours)")
+plt.xlabel("Weeks")
+plt.title("Weekly Screen Time")
+plt.show()
+
+The value 55 hours is much higher than the other weeks and is likely to appear as an outlier.
+
+
+============================================================
+SESSION 6 - PROBABILITY BASICS
+============================================================
+
+TASK 1
+Question:
+List the sample space for rolling a die and flipping a coin.
+
+Answer:
+S = [
+(1,H), (1,T), (2,H), (2,T),
+(3,H), (3,T), (4,H), (4,T),
+(5,H), (5,T), (6,H), (6,T)
+]
+
+There are 12 equally likely outcomes.
+
+TASK 2
+Question:
+Probability of drawing an even number from cards 1 to 10.
+
+Answer:
+Even numbers = 2, 4, 6, 8, 10
+Favorable outcomes = 5
+Total outcomes = 10
+
+P(Even) = 5 / 10 = 0.5 = 50%
+
+TASK 3
+Question:
+8 Spotify songs, 3 by Arijit Singh. Find probability of NOT Arijit Singh.
+
+Answer:
+Not Arijit songs = 8 - 3 = 5
+
+P(Not Arijit) = 5 / 8 = 0.625 = 62.5%
+
+TASK 4
+Question:
+P(Pizza)=0.3, P(Burger)=0.4, P(Both)=0.1. Find P(Pizza or Burger).
+
+Answer:
+P(Pizza or Burger)
+= P(Pizza) + P(Burger) - P(Both)
+= 0.3 + 0.4 - 0.1
+= 0.6
+
+Answer = 60%
+
+TASK 5
+Question:
+Explain conditional probability where phone add-to-cart probability rises from 0.2 to 0.5 for users interested in mobiles.
+
+Answer:
+The conditional probability P(Phone | Interested in Mobiles) = 0.5 means that among users who are interested in mobiles, 50% are expected to add a phone to their cart. The probability is higher than the overall probability of 0.2 because mobile interest provides additional information about user behavior.
+
+
+============================================================
+SESSION 7 - CONDITIONAL PROBABILITY & BAYES' THEOREM
+============================================================
+
+TASK 1
+Question:
+Out of 500 users, 120 bought accessories, 80 bought phones, and 50 bought both. Find P(Phone|Accessories).
+
+Answer:
+P(Phone|Accessories)
+= P(Phone and Accessories) / P(Accessories)
+
+Using counts:
+= 50 / 120
+= 0.4167
+
+Answer = 41.67%
+
+TASK 2
+Question:
+30% buy headphones and among them 40% later buy a smartphone. Find conditional probability.
+
+Answer:
+The conditional probability is directly given:
+
+P(Smartphone | Headphones) = 0.40
+
+Answer = 40%
+
+TASK 3
+Question:
+Write bayes_churn_probability() and test with prior_churn=0.15, prob_email_given_churn=0.6, prob_email=0.25.
+
+Answer:
+Python code:
+
+def bayes_churn_probability(prior_churn, prob_email_given_churn, prob_email):
+    return (prob_email_given_churn * prior_churn) / prob_email
+
+result = bayes_churn_probability(0.15, 0.6, 0.25)
+
+print("probability of churn:", result)
+print("percentage:", result * 100)
+
+Output:
+probability of churn: 0.36
+percentage: 36.0%
+
+TASK 4
+Question:
+Fraud = 2%, alert given fraud = 90%, false alert for normal transaction = 5%. Find probability transaction is fraudulent when flagged.
+
+Answer:
+P(F) = 0.02
+P(not F) = 0.98
+P(A|F) = 0.90
+P(A|not F) = 0.05
+
+First calculate P(A):
+P(A) = P(A|F)P(F) + P(A|not F)P(not F)
+= (0.90)(0.02) + (0.05)(0.98)
+= 0.018 + 0.049
+= 0.067
+
+Now:
+P(F|A) = (0.90 * 0.02) / 0.067
+= 0.018 / 0.067
+= 0.2687
+
+Answer = approximately 26.87%
+
+TASK 5
+Question:
+Give a food delivery scenario where conditional probability and Bayes' theorem help recommendations.
+
+Answer:
+AI-generated scenario:
+A food delivery app can use a user's previous orders, time of day, location, and cuisine preferences to estimate the probability that the user will order a particular food. For example, if a user frequently orders biryani on Friday evenings, the app can calculate the probability of ordering biryani given that it is Friday evening. Bayes' Theorem can update this probability when new information, such as a recent search or cart item, becomes available. This helps the recommendation system show more relevant restaurants and dishes.
+
+Own analysis:
+Bayesian reasoning helps the app continuously update recommendations as new user behavior becomes available, making the recommendations more personalized.
+
+
+============================================================
+SESSION 8 - PROBABILITY DISTRIBUTIONS (DISCRETE)
+============================================================
+
+TASK 1
+Question:
+Simulate 20 Bernoulli login trials with p=0.85.
+
+Answer:
+Python code:
+
+import numpy as np
+
+p = 0.85
+results = np.random.binomial(1, p, 20)
+
+print(results)
+
+Example output:
+[1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 0 1 1 1]
+
+Note:
+Because this is random, the output may be different each time.
+
+TASK 2
+Question:
+Probability of exactly 3 successful payments out of 5 with success rate 0.9.
+
+Answer:
+Python code:
+
+from scipy.stats import binom
+
+probability = binom.pmf(3, 5, 0.9)
+
+print("probability:", probability)
+
+Output:
+probability = 0.0729
+Percentage = 7.29%
+
+TASK 3
+Question:
+Spotify creates an average of 4 playlists per minute. Find probability of exactly 6.
+
+Answer:
+Python code:
+
+from scipy.stats import poisson
+
+probability = poisson.pmf(6, 4)
+
+print("probability:", probability)
+
+Output:
+probability = approximately 0.1042
+Percentage = approximately 10.42%
+
+TASK 4
+Question:
+Flipkart receives average 10 reviews per hour. Simulate 12 hours and plot.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+reviews = np.random.poisson(lam=10, size=12)
+
+print("reviews per hour:", reviews)
+
+plt.bar(range(1, 13), reviews)
+plt.xlabel("Hour")
+plt.ylabel("Number of Reviews")
+plt.title("Flipkart Reviews Received Per Hour")
+plt.show()
+
+TASK 5
+Question:
+Give a real-world analytics use case for one discrete distribution.
+
+Answer:
+Distribution: Poisson
+
+Use case:
+An IRCTC system can use the Poisson distribution to model the number of customer support requests received per minute or hour. If the average number of requests is known, Poisson probability can estimate the chance of receiving a specific number of requests during a time interval.
+
+Why it fits:
+Poisson is suitable for counting how many independent events occur during a fixed time interval.
+
+
+============================================================
+SESSION 9 - PROBABILITY DISTRIBUTIONS (CONTINUOUS)
+============================================================
+
+TASK 1
+Question:
+Generate 1000 normal random numbers with mean 500 and SD 100 and plot.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.random.normal(loc=500, scale=100, size=1000)
+
+plt.hist(data, bins=30)
+plt.xlabel("Sales Amount")
+plt.ylabel("Frequency")
+plt.title("Normal Distribution of Sales Amounts")
+plt.show()
+
+TASK 2
+Question:
+Calculate Z-score for 9500 steps when mean=8000 and SD=1200.
+
+Answer:
+Z = (X - mean) / SD
+= (9500 - 8000) / 1200
+= 1500 / 1200
+= 1.25
+
+Answer:
+Z-score = 1.25
+
+The user walked 1.25 standard deviations above the average.
+
+TASK 3
+Question:
+Plot standard normal curve and shade area between Z=-1 and Z=1.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+x = np.linspace(-4, 4, 1000)
+y = norm.pdf(x)
+
+plt.plot(x, y)
+
+x_fill = np.linspace(-1, 1, 300)
+plt.fill_between(x_fill, norm.pdf(x_fill))
+
+plt.xlabel("Z-score")
+plt.ylabel("Density")
+plt.title("Standard Normal Curve: Z = -1 to Z = 1")
+plt.show()
+
+The shaded area is approximately 68.27% of the distribution.
+
+TASK 4
+Question:
+Delivery time is normally distributed with mean 30 and SD 5. Find P(X < 25).
+
+Answer:
+Python code:
+
+from scipy.stats import norm
+
+probability = norm.cdf(25, loc=30, scale=5)
+
+print(probability)
+
+Output:
+approximately 0.1587
+
+Answer = approximately 15.87%
+
+TASK 5
+Question:
+Explain why normal distribution is important for app data.
+
+Answer:
+AI answer:
+The normal distribution is useful because many real-world measurements are approximately bell-shaped or can become approximately normal when averages are considered. In app analytics, it can help analyze variables such as delivery times, sales values, and user ratings. It also supports Z-scores, confidence intervals, hypothesis testing, and other statistical techniques.
+
+The normal distribution is especially useful when data is centered around an average and extreme values are less common.
+
+
+============================================================
+SESSION 10 - SAMPLING TECHNIQUES
+============================================================
+
+TASK 1
+Question:
+Randomly sample 20 users from 200 user IDs.
+
+Answer:
+Python code:
+
+import random
+
+user_ids = list(range(1, 201))
+sample = random.sample(user_ids, 20)
+
+print("random sample:", sample)
+
+TASK 2
+Question:
+Generate a proportional stratified sample of 60 orders from 1000 orders grouped by Ahmedabad, Surat, and Vadodara.
+
+Answer:
+Python code:
+
+import pandas as pd
+
+data = pd.DataFrame({
+    "order_id": range(1, 1001),
+    "city": (
+        ["Ahmedabad"] * 500 +
+        ["Surat"] * 300 +
+        ["Vadodara"] * 200
+    )
+})
+
+sample_size = 60
+
+sample = (
+    data.groupby("city", group_keys=False)
+    .apply(lambda group: group.sample(
+        n=round(len(group) / len(data) * sample_size),
+        random_state=42
+    ))
+)
+
+print(sample)
+
+Expected allocation:
+Ahmedabad = 30
+Surat = 18
+Vadodara = 12
+
+Total = 60
+
+TASK 3
+Question:
+Select every 10th review from 500 reviews.
+
+Answer:
+Python code:
+
+def systematic_sample(reviews, interval=10):
+    return reviews[interval-1::interval]
+
+reviews = list(range(1, 501))
+sample = systematic_sample(reviews)
+
+print(sample)
+
+Output starts:
+[10, 20, 30, 40, 50, ..., 500]
+
+TASK 4
+Question:
+Explain how sample size affects accuracy for 10,000 delivery records when sampling 50, 200, or 500.
+
+Answer:
+Larger samples generally provide more precise estimates because random sampling error decreases as sample size increases.
+
+Approximate standard error is proportional to 1 / sqrt(n).
+
+For n=50:
+relative standard error factor = 1/sqrt(50) = 0.1414
+
+For n=200:
+= 1/sqrt(200) = 0.0707
+
+For n=500:
+= 1/sqrt(500) = 0.0447
+
+Therefore:
+50 records -> lowest precision
+200 records -> better precision
+500 records -> highest precision
+
+TASK 5
+Question:
+Create a proportional stratified sample of 40 IPL fans grouped by favorite team.
+
+Answer:
+Python code:
+
+import pandas as pd
+
+fans = pd.DataFrame({
+    "fan_id": range(1, 101),
+    "team": (
+        ["MI"] * 30 +
+        ["CSK"] * 25 +
+        ["RCB"] * 20 +
+        ["GT"] * 15 +
+        ["KKR"] * 10
+    )
+})
+
+sample_size = 40
+
+samples = []
+
+for team, group in fans.groupby("team"):
+    n = round(len(group) / len(fans) * sample_size)
+    samples.append(group.sample(n=n, random_state=42))
+
+sample = pd.concat(samples)
+
+print(sample)
+
+The sample represents each team's proportion in the original fan population.
+
+
+============================================================
+SESSION 11 - CENTRAL LIMIT THEOREM (CLT)
+============================================================
+
+TASK 1
+Question:
+Take 1000 samples of size 30 from a skewed dataset, calculate sample means, and plot histogram.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+population = np.random.exponential(scale=50, size=10000)
+
+sample_means = []
+
+for i in range(1000):
+    sample = np.random.choice(population, size=30)
+    sample_means.append(np.mean(sample))
+
+plt.hist(sample_means, bins=30)
+plt.xlabel("Sample Mean")
+plt.ylabel("Frequency")
+plt.title("Central Limit Theorem - Sample Means")
+plt.show()
+
+TASK 2
+Question:
+Explain why sampling distribution of the mean becomes approximately normal.
+
+Answer:
+When many random samples of the same size are taken from a population, their means tend to form an approximately normal distribution as the sample size becomes sufficiently large. This happens even when the original data is skewed.
+
+Example:
+Zomato order amounts may be highly skewed because a few users place very expensive orders. However, if we repeatedly take samples of 30 orders and calculate their means, those sample means tend to form a more bell-shaped distribution.
+
+TASK 3
+Question:
+Give a real-world use of CLT in Flipkart, Swiggy, or IRCTC.
+
+Answer:
+Swiggy can use CLT to estimate average delivery time. Instead of analyzing every delivery, analysts can repeatedly take sufficiently large random samples and calculate their average delivery time. The sampling distribution of the mean helps estimate the overall average and quantify uncertainty around that estimate.
+
+TASK 4
+Question:
+Compare CLT simulations with sample size n=5 and n=30.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+population = np.random.exponential(scale=50, size=10000)
+
+means_n5 = [
+    np.mean(np.random.choice(population, 5))
+    for _ in range(1000)
+]
+
+means_n30 = [
+    np.mean(np.random.choice(population, 30))
+    for _ in range(1000)
+]
+
+plt.hist(means_n5, bins=30)
+plt.title("Sample Means with n=5")
+plt.xlabel("Sample Mean")
+plt.ylabel("Frequency")
+plt.show()
+
+plt.hist(means_n30, bins=30)
+plt.title("Sample Means with n=30")
+plt.xlabel("Sample Mean")
+plt.ylabel("Frequency")
+plt.show()
+
+Observation:
+The n=5 distribution is more spread out and can remain somewhat skewed. The n=30 distribution is narrower and more approximately normal.
+
+TASK 5
+Question:
+Demonstrate CLT using an exponential distribution.
+
+Answer:
+Python code:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+population = np.random.exponential(scale=2, size=10000)
+
+means = []
+
+for i in range(1000):
+    sample = np.random.choice(population, size=30)
+    means.append(np.mean(sample))
+
+plt.hist(means, bins=30)
+plt.xlabel("Sample Mean")
+plt.ylabel("Frequency")
+plt.title("CLT Using Exponential Distribution")
+plt.show()
+
+Observation:
+The original exponential population is right-skewed, but the distribution of sample means becomes approximately bell-shaped.
+
+
+============================================================
+SESSION 12 - HYPOTHESIS TESTING CONCEPTS
+============================================================
+
+TASK 1
+Question:
+State null and alternative hypotheses for whether a cashback offer increased average daily orders.
+
+Answer:
+H0: The cashback offer does not increase the average number of daily orders.
+
+H1: The cashback offer increases the average number of daily orders.
+
+In symbols:
+H0: mu_after <= mu_before
+H1: mu_after > mu_before
+
+TASK 2
+Question:
+If we wrongly conclude an algorithm works when it actually does not, which error occurs?
+
+Answer:
+Type I error.
+
+Explanation:
+A Type I error occurs when we reject a true null hypothesis and conclude that the algorithm works even though it does not actually improve listening time.
+
+TASK 3
+Question:
+p-value = 0.03 at 95% confidence level. Reject or fail to reject H0?
+
+Answer:
+Significance level alpha = 0.05
+
+Since:
+0.03 < 0.05
+
+We reject the null hypothesis.
+
+Interpretation:
+There is statistically significant evidence at the 5% level that the new discount banner increases purchases.
+
+TASK 4
+Question:
+Explain 99% confidence level for match alerts.
+
+Answer:
+A 99% confidence level corresponds to a significance level of 1% (alpha = 0.01). If the hypothesis test produces a p-value below 0.01, we reject the null hypothesis and conclude that there is strong statistical evidence that match alerts increase engagement. The stricter threshold reduces the chance of a Type I error but makes it harder to detect smaller effects.
+
+
+============================================================
+SESSION 13 - T-TESTS
+============================================================
+
+TASK 1
+Question:
+One-sample t-test for delivery times against 30 minutes.
+
+Answer:
+Python code:
+
+from scipy.stats import ttest_1samp
+
+data = [28, 32, 27, 35, 29, 31, 30, 33, 26, 34]
+
+t_stat, p_value = ttest_1samp(data, 30)
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+Result:
+t-statistic is approximately 0.58
+p-value is approximately 0.576
+
+Conclusion:
+Since p-value > 0.05, fail to reject H0. There is no statistically significant evidence that the average delivery time differs from 30 minutes.
+
+TASK 2
+Question:
+Compare independent step-count samples before and after installing a fitness app.
+
+Answer:
+Python code:
+
+from scipy.stats import ttest_ind
+
+before = [6500, 7000, 7200, 6800, 7500, 7100, 6900, 7300, 6700, 7000]
+after = [7600, 8100, 7900, 8500, 8000, 8300, 7800, 8200, 8400, 8100]
+
+t_stat, p_value = ttest_ind(before, after)
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+Interpretation:
+If p-value < 0.05, conclude that the average step counts are significantly different. The after group has a higher average, so a significant result would support an increase after using the app.
+
+TASK 3
+Question:
+Perform a paired t-test on screen time before and after Focus Mode.
+
+Answer:
+Python code:
+
+from scipy.stats import ttest_rel
+
+before = [6.2, 5.8, 7.0, 6.5, 5.9, 6.8, 7.2, 6.1, 6.7, 6.4]
+after = [5.1, 5.0, 6.0, 5.7, 5.2, 5.8, 6.1, 5.3, 5.9, 5.5]
+
+t_stat, p_value = ttest_rel(before, after)
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+Interpretation:
+The after values are lower. If p-value < 0.05, Focus Mode significantly reduced screen time.
+
+TASK 4
+Question:
+Compare 15 Zomato ratings with 15 Swiggy ratings. Which t-test should be used?
+
+Answer:
+Use an independent two-sample t-test because the ratings are from two separate groups of users.
+
+Python code:
+
+from scipy.stats import ttest_ind
+
+zomato = [4.2, 4.0, 4.5, 3.8, 4.1, 4.3, 4.0, 4.4, 3.9, 4.2, 4.1, 4.5, 4.0, 4.3, 4.2]
+swiggy = [4.0, 3.9, 4.2, 3.7, 4.1, 4.0, 3.8, 4.3, 4.0, 4.1, 3.9, 4.2, 4.0, 4.1, 3.8]
+
+t_stat, p_value = ttest_ind(zomato, swiggy)
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+TASK 5
+Question:
+Use a one-sample t-test on a dataset such as UPI transactions.
+
+Answer:
+Python code:
+
+from scipy.stats import ttest_1samp
+
+upi_transactions = [8, 10, 9, 11, 7, 12, 10, 9, 8, 11]
+
+t_stat, p_value = ttest_1samp(upi_transactions, 10)
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+
+Interpretation:
+Compare p-value with 0.05. If p-value < 0.05, reject H0. Otherwise, fail to reject H0.
+
+
+============================================================
+SESSION 14 - CHI-SQUARE TEST
+============================================================
+
+TASK 1
+Question:
+Create a contingency table for favorite food delivery app vs payment method with at least 20 responses.
+
+Answer:
+
+                 Paytm   PhonePe   Credit Card   Total
+Zomato              4        3          2           9
+Swiggy              2        4          2           8
+Uber Eats           1        1          1           3
+Total               7        8          5          20
+
+TASK 2
+Question:
+Observed counts:
+Spotify: Males 12, Females 18
+Gaana: Males 8, Females 7
+YouTube Music: Males 10, Females 15
+Calculate expected counts.
+
+Answer:
+Row totals:
+Spotify = 30
+Gaana = 15
+YouTube Music = 25
+
+Column totals:
+Males = 30
+Females = 40
+
+Grand total = 70
+
+Expected count = (row total * column total) / grand total
+
+Spotify Male:
+30*30/70 = 12.857
+
+Spotify Female:
+30*40/70 = 17.143
+
+Gaana Male:
+15*30/70 = 6.429
+
+Gaana Female:
+15*40/70 = 8.571
+
+YouTube Music Male:
+25*30/70 = 10.714
+
+YouTube Music Female:
+25*40/70 = 14.286
+
+TASK 3
+Question:
+Perform chi-square test of independence using Task 1 table.
+
+Answer:
+Python code:
+
+from scipy.stats import chi2_contingency
+
+table = [
+    [4, 3, 2],
+    [2, 4, 2],
+    [1, 1, 1]
+]
+
+chi2, p_value, dof, expected = chi2_contingency(table)
+
+print("chi-square:", chi2)
+print("p-value:", p_value)
+print("degrees of freedom:", dof)
+print("expected counts:")
+print(expected)
+
+Interpretation:
+For this small sample, compare the p-value with 0.05. If p-value > 0.05, fail to reject the null hypothesis and conclude there is not enough evidence of an association between app choice and payment method.
+
+Important:
+Some expected counts are very small, so this small demonstration is not ideal for a reliable chi-square test. A larger sample would be preferable.
+
+TASK 4
+Question:
+30 users: 18 prefer product and 12 do not. Company claims 70% prefer product. Perform chi-square goodness of fit.
+
+Answer:
+Expected counts:
+Prefer = 30 * 0.70 = 21
+Do not prefer = 30 * 0.30 = 9
+
+Observed = [18, 12]
+Expected = [21, 9]
+
+Chi-square:
+(18-21)^2/21 + (12-9)^2/9
+= 9/21 + 9/9
+= 0.4286 + 1
+= 1.4286
+
+Degrees of freedom = 1
+
+At alpha = 0.05, critical chi-square is approximately 3.841.
+
+Since 1.4286 < 3.841, fail to reject H0.
+
+Conclusion:
+There is not enough evidence at the 5% significance level to say that the company's 70% preference claim is incorrect.
+
+
+============================================================
+SESSION 15 - ANOVA
+============================================================
+
+TASK 1
+Question:
+Create purchase_data.csv with 15 records and 5 customers in each age group.
+
+Answer:
+CSV content:
+
+customer_id,age_group,purchase_value
+1,18-25,450
+2,18-25,520
+3,18-25,480
+4,18-25,550
+5,18-25,500
+6,26-35,620
+7,26-35,680
+8,26-35,650
+9,26-35,720
+10,26-35,700
+11,36-50,800
+12,36-50,850
+13,36-50,820
+14,36-50,900
+15,36-50,880
+
+TASK 2
+Question:
+Read purchase_data.csv and perform one-way ANOVA.
+
+Answer:
+Python code:
+
+import pandas as pd
+from scipy.stats import f_oneway
+
+df = pd.read_csv("purchase_data.csv")
+
+group1 = df[df["age_group"] == "18-25"]["purchase_value"]
+group2 = df[df["age_group"] == "26-35"]["purchase_value"]
+group3 = df[df["age_group"] == "36-50"]["purchase_value"]
+
+f_stat, p_value = f_oneway(group1, group2, group3)
+
+print("f-statistic:", f_stat)
+print("p-value:", p_value)
+
+For the supplied data, the result is approximately:
+F-statistic = 62.95
+p-value < 0.001
+
+TASK 3
+Question:
+Interpret ANOVA results.
+
+Answer:
+Since the p-value is less than 0.05, reject the null hypothesis. There is a statistically significant difference in average purchase value among the three age groups. The 36-50 group has the highest average purchase value, while the 18-25 group has the lowest.
+
+TASK 4
+Question:
+Calculate between-group and within-group variance.
+
+Answer:
+Group means:
+18-25 = 500
+26-35 = 674
+36-50 = 850
+
+Grand mean = 674.6667
+
+Using sample-variance style calculations:
+Between-group variance (based on group mean variation) is approximately 32,450.67.
+Within-group variance (average of within-group sample variances) is approximately 1,150.00.
+
+Interpretation:
+Between-group variance represents how much the age-group means differ from each other. Within-group variance represents how much purchase values vary among customers inside each age group.
+
+TASK 5
+Question:
+Perform one-way ANOVA for Students, Working Professionals, and Retirees.
+
+Answer:
+Python code:
+
+from scipy.stats import f_oneway
+
+students = [300, 350, 320, 280, 330]
+working_professionals = [700, 750, 680, 720, 800]
+retirees = [450, 500, 480, 520, 470]
+
+f_stat, p_value = f_oneway(
+    students,
+    working_professionals,
+    retirees
+)
+
+print("f-statistic:", f_stat)
+print("p-value:", p_value)
+
+Interpretation:
+If p-value < 0.05, average monthly order amounts differ significantly between at least two customer segments.
+
+
+============================================================
+SESSION 16 - CORRELATION ANALYSIS
+============================================================
+
+TASK 1
+Question:
+Create a 10-15 song dataset and calculate Pearson correlation between danceability and popularity.
+
+Answer:
+Example data:
+
+danceability = [0.55, 0.62, 0.70, 0.48, 0.80, 0.66, 0.72, 0.50, 0.77, 0.60]
+popularity = [45, 52, 65, 40, 78, 60, 70, 43, 75, 55]
+
+Python code:
+
+import pandas as pd
+
+df = pd.DataFrame({
+    "danceability": danceability,
+    "popularity": popularity
+})
+
+correlation = df["danceability"].corr(df["popularity"])
+
+print("pearson correlation:", correlation)
+
+Interpretation:
+A positive correlation means songs with higher danceability tend to have higher popularity in this sample. Correlation does not prove that danceability causes popularity.
+
+TASK 2
+Question:
+Use Spearman correlation between IPL runs and Instagram followers.
+
+Answer:
+Python code:
+
+from scipy.stats import spearmanr
+
+runs = [5000, 4500, 3000, 2500, 4200, 3500, 2800, 2000]
+followers = [35, 30, 20, 15, 28, 24, 18, 12]
+
+correlation, p_value = spearmanr(runs, followers)
+
+print("spearman correlation:", correlation)
+print("p-value:", p_value)
+
+Interpretation:
+A strong positive Spearman correlation would mean players with higher total runs generally tend to have more followers. It does not prove that runs directly cause followers.
+
+TASK 3
+Question:
+Create a correlation matrix for price, rating, and number of reviews.
+
+Answer:
+Python code:
+
+import pandas as pd
+
+df = pd.DataFrame({
+    "price": [500, 700, 1000, 1200, 1500, 1800],
+    "rating": [4.2, 4.0, 3.8, 4.5, 4.3, 3.9],
+    "reviews": [120, 200, 350, 500, 420, 300]
+})
+
+corr_matrix = df.corr()
+
+print(corr_matrix)
+
+TASK 4
+Question:
+Visualize the correlation matrix using seaborn heatmap.
+
+Answer:
+Python code:
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.heatmap(corr_matrix, annot=True, cmap="coolwarm")
+plt.title("Flipkart Product Feature Correlation")
+plt.show()
+
+TASK 5
+Question:
+List two pitfalls when interpreting correlation.
+
+Answer:
+
+1. Correlation does not imply causation.
+Example:
+YouTube video views and advertising spend may be positively correlated. This does not prove that advertising alone caused all additional views because content quality and popularity may also affect views.
+
+2. Confounding variables can create misleading correlation.
+Example:
+Zomato order value and delivery time might appear correlated during weekends. A third factor, such as higher weekend demand, could affect both order value and delivery time.
+
+
+============================================================
+SESSION 17 - INTRODUCTION TO REGRESSION
+============================================================
+
+TASK 1
+Question:
+YouTube influencers have followers and average monthly brand deals. Identify dependent and independent variables.
+
+Answer:
+Independent variable = Number of followers
+Dependent variable = Average monthly brand deals
+
+Reason:
+Followers are used as the predictor. Brand deals are the outcome we want to predict. The regression model estimates how expected brand deals change as follower count changes.
+
+TASK 2
+Question:
+Plot Myntra ad spend vs app downloads and highlight line of best fit.
+
+Answer:
+Python code:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    "ad_spend_lakhs": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12],
+    "downloads_thousands": [12, 16, 20, 25, 28, 32, 35, 39, 43, 50]
+})
+
+plt.scatter(df["ad_spend_lakhs"], df["downloads_thousands"])
+
+m, b = __import__("numpy").polyfit(
+    df["ad_spend_lakhs"],
+    df["downloads_thousands"],
+    1
+)
+
+plt.plot(
+    df["ad_spend_lakhs"],
+    m * df["ad_spend_lakhs"] + b
+)
+
+plt.xlabel("Ad Spend (Lakhs)")
+plt.ylabel("App Downloads (Thousands)")
+plt.title("Myntra Ad Spend vs App Downloads")
+plt.show()
+
+TASK 3
+Question:
+Fit simple linear regression to predict Swiggy daily orders from advertising spend.
+
+Answer:
+Python code:
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+ad_spend = np.array([2, 3, 4, 5, 6, 7, 8, 9, 10]).reshape(-1, 1)
+orders = np.array([120, 135, 150, 165, 180, 195, 215, 230, 250])
+
+model = LinearRegression()
+model.fit(ad_spend, orders)
+
+print("slope:", model.coef_[0])
+print("intercept:", model.intercept_)
+
+Output:
+slope = approximately 16.17
+intercept = approximately 87.22
+
+Interpretation:
+Slope means that for every additional Rs 1 lakh spent on advertising, predicted daily orders increase by about 16.17 orders in this sample.
+
+Intercept means the model predicts about 87.22 daily orders when advertising spend is zero.
+
+TASK 4
+Question:
+Calculate and interpret R-squared.
+
+Answer:
+Python code:
+
+r_squared = model.score(ad_spend, orders)
+
+print("r-squared:", r_squared)
+
+For the sample data, R-squared is approximately 0.997.
+
+Interpretation:
+Approximately 99.7% of the variation in daily orders is explained by advertising spend in this simple sample model. This indicates a very strong linear relationship in the simulated data. Real-world data would normally be more noisy.
+
+============================================================
+CASE STUDY 1 - E-COMMERCE SALES ANALYSIS
+============================================================
+
+Dataset:
+Kaggle - Online Retail Dataset
+File: OnlineRetail.csv
+
+Columns:
+InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country
+
+TASK 1
+Question:
+Filter United Kingdom transactions and count unique CustomerIDs.
+
+Answer:
+Excel steps:
+1. Open OnlineRetail.csv.
+2. Select the data.
+3. Turn on Filter.
+4. Filter Country = United Kingdom.
+5. Copy the CustomerID column to another area.
+6. Use Remove Duplicates or a PivotTable to count unique CustomerIDs.
+
+Formula option in newer Excel:
+=COUNTA(UNIQUE(FILTER(G2:G100000,H2:H100000="United Kingdom")))
+
+The exact number depends on the downloaded version of the dataset.
+
+TASK 2
+Question:
+Create a PivotTable for total sales by Country and identify top 3 countries.
+
+Answer:
+First create a Sales column:
+=Quantity*UnitPrice
+
+PivotTable:
+Rows = Country
+Values = Sum of Sales
+
+Sort Sum of Sales from largest to smallest.
+
+For the standard Online Retail dataset, the United Kingdom is the dominant country by sales. The exact top-three ordering can vary slightly depending on filtering/cleaning and the dataset version, so record the top three shown by your PivotTable.
+
+TASK 3
+Question:
+Calculate average order value per InvoiceNo and highlight InvoiceNo above Rs 10,000.
+
+Answer:
+Create a Sales column:
+=E2*F2
+
+where E = Quantity and F = UnitPrice, according to the actual column positions in your sheet.
+
+Use a PivotTable:
+Rows = InvoiceNo
+Values = Sum of Sales
+
+Average order value:
+=AVERAGE(order_value_range)
+
+Conditional Formatting:
+Home -> Conditional Formatting -> Highlight Cells Rules -> Greater Than -> 10000
+
+Highlight the corresponding InvoiceNo/order value rows.
+
+TASK 4
+Question:
+Perform a t-test comparing average order value for France and Germany.
+
+Answer:
+Excel:
+1. Create one column containing order values for France.
+2. Create another column containing order values for Germany.
+3. Go to Data -> Data Analysis.
+4. Select "t-Test: Two-Sample Assuming Unequal Variances".
+5. Set Alpha = 0.05.
+6. Compare the p-value with 0.05.
+
+Conclusion rule:
+If p-value < 0.05 -> statistically significant difference.
+If p-value >= 0.05 -> not statistically significant.
+
+The exact conclusion depends on the values in the downloaded dataset and how order values are aggregated. Use the Excel output rather than assuming a result.
+
+TASK 5
+Question:
+Generate a summary of customer purchasing patterns.
+
+Answer:
+Insights:
+The analysis can be used to identify countries generating the highest sales, average order value, and unusually high-value invoices. The United Kingdom is expected to dominate the sales because it contains most transactions in the Online Retail dataset. The PivotTable can also reveal which countries contribute substantial revenue. Seasonal changes in InvoiceDate can be examined by grouping dates by month or quarter. High-value invoices should be reviewed separately because extreme orders can strongly affect average order value.
+
+
+============================================================
+CASE STUDY 2 - CUSTOMER CHURN ANALYSIS
+============================================================
+
+Dataset:
+Kaggle - Telco Customer Churn Dataset
+File: Telco-Customer-Churn.csv
+
+Columns:
+CustomerID, Gender, SeniorCitizen, Partner, Dependents, Tenure, PhoneService, InternetService, Contract, MonthlyCharges, TotalCharges, Churn
+
+TASK 1
+Question:
+Count customers with Churn = Yes and Churn = No.
+
+Answer:
+Excel formulas:
+
+=COUNTIF(L:L,"Yes")
+=COUNTIF(L:L,"No")
+
+If Churn is in another column, replace L:L with the actual Churn column.
+
+For the standard Telco Customer Churn dataset:
+Churn = Yes: 1869
+Churn = No: 5174
+
+Total = 7043
+
+TASK 2
+Question:
+Use a PivotTable to analyze Contract type vs Churn.
+
+Answer:
+PivotTable setup:
+Rows = Contract
+Columns = Churn
+Values = Count of CustomerID
+
+For the standard dataset, churned customer counts are approximately:
+Month-to-month = 1655
+One year = 166
+Two year = 48
+
+This shows that month-to-month customers have substantially more churn than customers on longer contracts.
+
+TASK 3
+Question:
+Calculate average MonthlyCharges for churned and non-churned customers using AVERAGEIF.
+
+Answer:
+If MonthlyCharges is column J and Churn is column L:
+
+=AVERAGEIF(L:L,"Yes",J:J)
+=AVERAGEIF(L:L,"No",J:J)
+
+For the standard Telco dataset, the averages are approximately:
+Churn = Yes -> Rs 74.44
+Churn = No -> Rs 61.27
+
+Interpretation:
+Customers who churn have a higher average monthly charge in this dataset.
+
+TASK 4
+Question:
+Create a bar chart comparing churned vs non-churned customers for each InternetService type.
+
+Answer:
+Create a PivotTable:
+Rows = InternetService
+Columns = Churn
+Values = Count of CustomerID
+
+Then:
+Insert -> Bar/Column Chart
+
+Interpretation:
+Fiber optic customers show a large number of churned customers. DSL also has churned customers, while customers with no internet service generally have lower churn counts.
+
+TASK 5
+Question:
+Use CORREL to check relationship between Tenure and Churn after converting Yes/No to 1/0.
+
+Answer:
+Create a new column named Churn_Numeric.
+
+Formula:
+=IF(L2="Yes",1,0)
+
+Then use:
+=CORREL(F2:F7044,M2:M7044)
+
+where F is Tenure and M is Churn_Numeric, depending on the actual sheet columns.
+
+Interpretation:
+The standard Telco dataset generally shows a negative correlation between tenure and churn. This means customers with longer tenure are less likely to churn. Correlation is not proof of causation.
+
+Approximate correlation:
+around -0.35
+
+This indicates a moderate negative relationship.
